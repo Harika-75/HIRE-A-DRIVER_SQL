@@ -40,11 +40,25 @@ VALUES
  
 INSERT INTO bookings (id, source, destination, booking_date, booking_time, status)
 VALUES
-(2, 'Visakhapatnam', 'Hyderabad',  '2026-03-03', '09:00:00', 'PENDING'),
-(2, 'Visakhapatnam', 'Bangalore',  '2026-03-11', '10:30:00', 'CONFIRMED'),
-(3, 'Chennai',       'Hyderabad',  '2026-03-01', '11:15:00', 'PENDING'),
-(3, 'Chennai',       'Bangalore',  '2026-02-13', '12:00:00', 'COMPLETED'),
-(4, 'Hyderabad',     'Pune',       '2026-02-14', '08:45:00', 'PENDING'),
-(4, 'Hyderabad',     'Mumbai',     '2026-03-15', '14:30:00', 'CONFIRMED');
--- (5, 'Bangalore',     'Chennai',    '2026-03-16', '16:00:00', 'CANCELLED'), (5, 'Bangalore',     'Visakhapatnam','2026-03-17','18:20:00', 'PENDING'),(6, 'Pune',          'Mumbai',     '2026-02-18', '07:30:00', 'COMPLETED'),
---(6,'Mumbai',        'Delhi',      '2026-03-19', '21:00:00', 'CONFIRMED');
+ (2, 'Visakhapatnam', 'Hyderabad',  '2026-03-03', '09:00:00', 'PENDING'),
+ (2, 'Visakhapatnam', 'Bangalore',  '2026-03-11', '10:30:00', 'CONFIRMED'),
+ (3, 'Chennai',       'Hyderabad',  '2026-03-01', '11:15:00', 'PENDING'),
+ (3, 'Chennai',       'Bangalore',  '2026-02-13', '12:00:00', 'COMPLETED'),
+ (4, 'Hyderabad',     'Pune',       '2026-02-14', '08:45:00', 'PENDING'),
+(4, 'Hyderabad',     'Mumbai',     '2026-03-15', '14:30:00', 'CONFIRMED'),
+(5, 'Bangalore',     'Chennai',    '2026-03-16', '16:00:00', 'CANCELLED'), 
+(5, 'Bangalore',     'Visakhapatnam','2026-03-17','18:20:00', 'PENDING'),
+(6, 'Pune',          'Mumbai',     '2026-02-18', '07:30:00', 'COMPLETED'),
+(6,'Mumbai',        'Delhi',      '2026-03-19', '21:00:00', 'CONFIRMED');
+
+UPDATE users
+SET 
+    firstname = REPLACE(firstname, '"', ''),
+    lastname  = REPLACE(lastname, '"', ''),
+    email     = REPLACE(email, '"', ''),
+    phone_number = REPLACE(phone_number, '"', ''),
+    address   = REPLACE(address, '"', '')
+WHERE id > 0;
+
+DESCRIBE bookings;
+SELECT * FROM bookings;
