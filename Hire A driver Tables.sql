@@ -12,42 +12,26 @@ gender VARCHAR(10) NOT NULL,
 address VARCHAR(100) NOT NULL);
 
 SELECT *FROM users;
- 
 
-CREATE TABLE bookings(
-booking_id INT PRIMARY KEY AUTO_INCREMENT,
-id int,
-source VARCHAR(500) NOT NULL,
-destination VARCHAR(500) NOT NULL,
- booking_date DATE NOT NULL,
- booking_time TIME NOT NULL,
-status ENUM('PENDING','CONFIRMED','COMPLETED','CANCELLED') default 'PENDING',
-created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
-               ON UPDATE CURRENT_TIMESTAMP,
-FOREIGN KEY (id) REFERENCES users(id)
+CREATE TABLE trips (
+    trip_id INT PRIMARY KEY AUTO_INCREMENT,
+    source VARCHAR(100) NOT NULL,
+    destination VARCHAR(100) NOT NULL,
+    duration_hours INT NOT NULL,
+    trip_price DECIMAL(10,2) NOT NULL
 );
 
-SELECT*FROM bookings;
+CREATE TABLE bookings (
+    booking_id INT PRIMARY KEY AUTO_INCREMENT,
+    customer_id INT NOT NULL,
+    trip_id INT NOT NULL,
+    booking_date DATE NOT NULL,
+    booking_status ENUM('PENDING','CONFIRMED','COMPLETED','CANCELLED') DEFAULT 'PENDING',
 
-INSERT INTO bookings (id, source, destination, booking_date, booking_time, status)
-VALUES
-(1, 'Visakhapatnam', 'Hyderabad', '2026-03-10', '10:30:00', 'PENDING');
-
-INSERT INTO bookings (id, source, destination, booking_date, booking_time, status)
-VALUES
-(1, 'Visakhapatnam', 'Hyderabad', '2026-03-10', '10:30:00', 'CONFIRMED');
+    FOREIGN KEY (customer_id) REFERENCES users(id),
+    FOREIGN KEY (trip_id) REFERENCES trips(trip_id)
+);
+ 
 
 
-INSERT INTO bookings (id, source, destination, booking_date, booking_time, status)
-VALUES
- (2, 'Visakhapatnam', 'Hyderabad',  '2026-03-03', '09:00:00', 'PENDING'),
- (2, 'Visakhapatnam', 'Bangalore',  '2026-03-11', '10:30:00', 'CONFIRMED'),
- (3, 'Chennai',       'Hyderabad',  '2026-03-01', '11:15:00', 'PENDING'),
- (3, 'Chennai',       'Bangalore',  '2026-02-13', '12:00:00', 'COMPLETED'),
- (4, 'Hyderabad',     'Pune',       '2026-02-14', '08:45:00', 'PENDING'),
-(4, 'Hyderabad',     'Mumbai',     '2026-03-15', '14:30:00', 'CONFIRMED'),
-(6, 'Pune',          'Mumbai',     '2026-02-18', '07:30:00', 'COMPLETED'),
-(6,'Mumbai',        'Delhi',      '2026-03-19', '21:00:00', 'CONFIRMED');
 
-SELECT user, host FROM mysql.user;
